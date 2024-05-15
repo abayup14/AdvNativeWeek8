@@ -16,7 +16,7 @@ import com.example.todoapp.viewmodel.ListTodoViewModel
 class TodoListFragment : Fragment() {
     private lateinit var binding: FragmentTodoListBinding
     private lateinit var viewModel: ListTodoViewModel
-    private var todoListAdapter = TodoListAdapter(arrayListOf())
+    private var todoListAdapter = TodoListAdapter(arrayListOf(), {item -> viewModel.clearTask(item)})
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +48,7 @@ class TodoListFragment : Fragment() {
             todoListAdapter.updateTodoList(it)
             if (it.isEmpty()) {
                 binding.recViewTodo?.visibility = View.GONE
-                binding.txtError.setText("Your Todo is empty")
+                binding.txtError.setText("Your todo is empty")
             } else {
                 binding.recViewTodo?.visibility = View.VISIBLE
             }
